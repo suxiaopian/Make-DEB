@@ -1,0 +1,29 @@
+#! /bin/sh
+
+# 如果程序在运行，先杀掉程序
+processLogin=$(ps aux | grep 'main' | grep -v grep)
+if [ "$processLogin" != "" ]; then
+	    pkill main
+fi
+
+# 清理文件
+rm -rf /opt/mypack/*
+
+# 移除桌面启动程序
+NAME_USER=`who | awk '{print $1}' | sort | uniq`
+for name in $NAME_USER
+do
+	if [ "$name" != "root" ]; then
+		CURRENT_HOME_DIR="/home/$name"
+	else
+		CURRENT_HOME_DIR="/$name"
+	fi
+
+	DESKTOP_CH=$CURRENT_HOME_DIR/Desktop/mypack.desktop
+
+	echo $DESKTOP_CH
+	if [ -f $DESKTOP_CH ]; then
+		rm -rf $DESKTOP_CH
+	fi
+done
+

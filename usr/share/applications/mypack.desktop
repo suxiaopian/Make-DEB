@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0.0
+Name=mypack
+Comment=xiaohuihui application
+Exec=/opt/mypack/bin/startLogin.sh
+Icon=/usr/share/icons/icon.png
+Terminal=true
+Type=Application
+Categories=Qt;desktop
+ 
+ 
+

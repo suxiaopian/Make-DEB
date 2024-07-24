@@ -1,0 +1,33 @@
+#! /bin/sh
+
+chmod -R 755 /opt/mypack/bin
+
+# 如果程序已经在运行，先杀掉程序，可解决覆盖安装问题
+processLogin=$(ps aux | grep 'main' | grep -v grep)
+if [ "$processLogin" != "" ]; then
+	    pkill main
+fi
+
+# 下面主要是把启动程序拷贝到桌面
+NAME_USER=`who | awk '{print $1}' | sort | uniq`
+for name in $NAME_USER;
+
+do
+	if [ "$name" != "root" ];then
+		CURRENT_HOME_DIR="/home/$name"
+	else
+		CURRENT_HOME_DIR="/$name"
+	fi
+	DESKTOP_DIR_CH=$CURRENT_HOME_DIR/Desktop
+	XIAOHUIHUIPATH="/opt/mypack/bin"
+
+	if [ -d $DESKTOP_DIR_CH ]; 
+	then
+		cp /usr/share/applications/mypack.desktop $DESKTOP_DIR_CH
+		chmod +w $DESKTOP_DIR_CH/mypack.desktop
+		chown $name:$name $DESKTOP_DIR_CH/mypack.desktop
+		chown $name:$name $XIAOHUIHUIPATH
+	fi
+
+done
+

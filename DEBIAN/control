@@ -1,0 +1,9 @@
+Package: mypack
+Version: 1.0.1
+Section: utils
+Priority: optional
+Architecture: i386
+#Depends: libopencv_highgui(>=4.5), libopencv_core(>=4.5), libopencv_imgcodecs(>=4.5), libopencv_imgproc(>=4.5)
+Installed-Size: 512
+Maintainer: lyh
+Description: a vision package
